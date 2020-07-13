@@ -68,8 +68,7 @@ def img2text(img):
 	from PIL import Image
 	import cv2
 
-	tess.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
-
+#	tess.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
 
 	img = cv2.imdecode(img,cv2.IMREAD_COLOR)
