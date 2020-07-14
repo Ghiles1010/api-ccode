@@ -1,32 +1,30 @@
-def treshold_inv(img):
+def treshold_inv(img, large, long):
 
-	long = img.shape[0]
-	large = img.shape[1]
+	
+
 	for i in range(long):
 		for j in range(large):
 		
 			R = img[i,j][0]
 			G = img[i,j][1]
 			B = img[i,j][2]
+			
 
 			lum = 0.2126 * R + 0.7152 * G + 0.0722 * B
 
 			if lum < 80:
 
-				img[i,j][0] = 255
-				img[i,j][1] = 255
-				img[i,j][2] = 255
+				img[i,j] = (255, 255, 255)
 			
 			else:
-				img[i,j][0] = 0
-				img[i,j][1] = 0
-				img[i,j][2] = 0
+				img[i,j] = (0, 0, 0)
+
 	return img
 
-def treshold(img):
+def treshold(img, large, long):
 
-	long = img.shape[0]
-	large = img.shape[1]
+	
+
 	for i in range(long):
 		for j in range(large):
 		
@@ -38,14 +36,10 @@ def treshold(img):
 
 			if lum < 180:
 
-				img[i,j][0] = 0
-				img[i,j][1] = 0
-				img[i,j][2] = 0
+				img[i,j] = (0, 0, 0)
 			
 			else:
-				img[i,j][0] = 255
-				img[i,j][1] = 255
-				img[i,j][2] = 255
+				img[i,j] = (255, 255, 255)
 	return img
 
 				
@@ -62,22 +56,18 @@ def treshold(img):
 
 
 
-def img2text(img):
+def img2text(imgB, img, large, long):
 
 	import pytesseract as tess
 	from PIL import Image
-	import cv2
+	from matplotlib import cm
+	import numpy as np
 
-#	tess.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
+	#tess.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
 
-	img = cv2.imdecode(img,cv2.IMREAD_COLOR)
-	img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-	cv2.imwrite("recu.png", img)
 
-	long = img.shape[0]
-	large = img.shape[1]
 
 	R = 0
 	G = 0
@@ -86,7 +76,9 @@ def img2text(img):
 
 	for i in range(long):
 		for j in range(large):
-		
+			
+			#print(i,j)
+
 			R += img[i,j][0]
 			G += img[i,j][1]
 			B += img[i,j][2]
@@ -101,12 +93,12 @@ def img2text(img):
 
 	if lum < 127:
 		
-		thresh1 = treshold_inv(img)
+		img = treshold_inv(img, large, long)
 		
 	else:
-		thresh1 = treshold(img)
+		img = treshold(img, large, long)
 		
-		
-	text = tess.image_to_string(thresh1)
+	
+	text = tess.image_to_string(imgB)
 
 	return text
