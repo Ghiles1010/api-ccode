@@ -60,7 +60,6 @@ def img2text(imgB, img, large, long):
 
 	import pytesseract as tess
 	from PIL import Image
-	from matplotlib import cm
 	import numpy as np
 
 	#tess.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
