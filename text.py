@@ -64,7 +64,7 @@ def img2text(imgB, img, large, long):
 
 	#tess.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
-	tess.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
+	tess.pytesseract.tesseract_cmd = r'/app/.apt/usr/bin/tesseract'
 
 
 
